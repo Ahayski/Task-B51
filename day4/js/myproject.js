@@ -35,10 +35,12 @@ function submitMP(event) {
 function renderMP() {
     document.getElementById("contents").innerHTML = ''
     for (let index = 0; index < dataMP.length; index++) {
-        document.getElementById("contents").innerHTML += `<div class="MP-card">
+        document.getElementById("contents").innerHTML += `
+        <div class="MP-card">
+        
         <div class="img-utama"><img src="${dataMP[index].image}" alt="Foto Profil"> </div>
         <div class="card1">
-            <h3>${dataMP[index].Project}</h3>
+        <a href="./myproject-detail.html"><h3>${dataMP[index].Project}</h3></a>
             <p>Durasi 3 bulan</p>
         </div>
         <div class="card2">
@@ -77,3 +79,5 @@ function renderTechImages(Object) {
 
     return renderIcon;
 }
+
+// Detail project

@@ -261,6 +261,11 @@ body {
     width: 100%;
 }
 
+.MP-card .card1 a {
+    text-decoration: none;
+    color: black;
+}
+
 .MP-card .card1 p {
     color: #868686;
     font-size: 14px;
