@@ -1,4 +1,4 @@
-let dataMP = []
+const dataMP = []
 
 function submitMP(event) {
     event.preventDefault()
@@ -64,11 +64,14 @@ function renderTechImages(Object) {
 
     if (Object.inputNode) {
         renderIcon += `<img src="assets/icon/nodejs.png">`;
-    } else if (Object.inputNext) {
+    }
+    if (Object.inputNext) {
         renderIcon += `<img src="assets/icon/nextjs.png">`;
-    } else if (Object.inputReact) {
+    }
+    if (Object.inputReact) {
         renderIcon += `<img src="assets/icon/reactjs.png">`;
-    } else if (Object.inputTypeS) {
+    }
+    if (Object.inputTypeS) {
         renderIcon += `<img src="assets/icon/typescript.png">`;
     }
 
