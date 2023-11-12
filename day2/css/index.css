@@ -1,0 +1,182 @@
+* {
+    margin: 0;
+}
+
+html {
+    font-family: poppin, sans-serif;
+}
+
+body {
+    background-color: #dce0e4;
+}
+
+.navbar {
+    background-color: #f4f3f3;
+    box-shadow: 0px 0px 1px black;
+    height: 75px;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.nav-cd1 {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 30px;
+}
+
+.nav-cd1 ul {
+    display: flex;
+    gap: 50px;
+    list-style-type: none;
+    align-items: center;
+}
+
+.nav-cd2 {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 70px;
+}
+
+.btn-contact {
+    background-color: #111727;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+}
+
+.nav-link {
+    font-size: 20px;
+    width: max-content;
+}
+
+.nav-link a {
+    color: black;
+    text-decoration: none;
+}
+
+.nav-link a:hover {
+    font-weight: bolder;
+}
+
+.Contain-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.contain-based {
+    background-color: white;
+    margin: 150px auto;
+    display: flex;
+    flex-direction: row;
+    width: 1000px;
+    box-shadow: 0.3em 0.3em 1em black;
+    padding: 40px 40px 40px 40px;
+}
+
+.contain1 {
+    margin-top: 50px;
+    width: 750px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contain2 {
+    display: flex;
+    justify-content: end;
+}
+
+.artikel {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contain-contact {
+    display: flex;
+    width: 350px;
+    margin-top: 40px;
+}
+
+.ct-child {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.ct-cd1 {
+    display: flex;
+}
+
+.btn-ct {
+    width: 100px;
+    font-size: 15px;
+    background: #111727;
+    color: white;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.btn-ct:hover {
+    opacity: 0.9;
+}
+
+.ct-cd2 a {
+    display: flex;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+}
+
+.ct-child a:hover {
+    color: blue;
+}
+
+.contain-sosmed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 30px;
+    width: 350px;
+    height: 100px;
+}
+
+.contain-sosmed a {
+    color: black;
+}
+
+.contain-sosmed a:hover {
+    color: rgb(60, 11, 105);
+}
+
+.contain-card {
+    box-shadow: 0.3em 0.3em 1.3em black;
+    background-color: white;
+    width: 300px;
+    margin-right: 20px;
+    border-radius: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.contain-card img {
+    width: 100%;
+    border-radius: 20px 20px 0 0;
+}
+
+.card-font {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

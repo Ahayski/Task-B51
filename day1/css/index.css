@@ -1,0 +1,18 @@
+* {
+    margin: 0px;
+}
+
+button {
+    width: 100px;
+    font-size: 15px;
+    background: #042a36;
+    color: white;
+    border: 1px solid white;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 10px;
+}
+
+button:hover {
+    opacity: 0.9;
+}
