@@ -1,0 +1,105 @@
+<html>
+
+<head>
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="css/myproject.css">
+</head>
+
+<nav class="navbar">
+    <div class="nav-cd1">
+        <ul>
+            <li><img src="assets/image/dw.png" style="height: 40px;"></li>
+            <li class="nav-link">
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+            <li class="nav-link">
+                <a href="myproject.html">
+                    My Project
+                </a>
+            </li>
+        </ul>
+        <div class="nav-cd2">
+            <a href="contact.html" class="btn-contact">Contact me</a>
+        </div>
+    </div>
+</nav>
+<!-- form untuk add my project -->
+<div class="container-parent">
+    <div class="container">
+        <h2>ADD MY PROJECT</h2>
+        <form class="form-MP" onsubmit="submitMP(event)">
+            <label class="label-MP">Project Name</label>
+            <input type="text" class="input-MP" id="inputProject" />
+            <!-- untuk star & end date -->
+            <div class="ct-form">
+                <div class="ct-form1">
+                    <label class="label-MP">Start Date</label>
+                    <input type="text" name="date" class="input-MP" id="inputStart" onfocus="(this.type='date')"
+                        onblur="if(!this.value)this.type='text'" />
+                </div>
+                <div class="ct-form2">
+                    <label class="label-MP">End Date</label>
+                    <input type="text" name="date" class="input-MP" id="inputEnd" onfocus="(this.type='date')"
+                        onblur="if(!this.value)this.type='text'" />
+                </div>
+            </div>
+            <label class="label-MP">Description</label>
+            <textarea class="input-desc" id="inputDesc"></textarea>
+
+            <!-- untuk check box -->
+            <div class="cekbox">
+                <label class="label-MP">Technologies</label>
+                <div class="cekbox-ct">
+                    <div class="cekbox1">
+                        <div><input type="checkbox" id="inputNode"> Node Js </div>
+                        <div><input type="checkbox" id="inputNext"> Next Js </div>
+                    </div>
+                    <div class="cekbox2">
+                        <div> <input type="checkbox" id="inputReact"> React Js </div>
+                        <div> <input type="checkbox" id="inputTypeS"> Typescript </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <label class="label-MP">Upload Image</label>
+                <div class="input-blog-image-group">
+                    <label for="inputImage">
+                        <div class="bt-choose">
+                            <p>choose</p>
+                        </div>
+                        <img src="assets/icon/file.png" alt="file" />
+                    </label>
+                    <input type="file" id="inputImage" hidden />
+                </div>
+            </div>
+            <div class="btn-sbct">
+                <button>Submit</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<hr class="line" />
+<div class="mp-bg">
+    <div class="mp-title">
+        <h1>MY PROJECT</h1>
+    </div>
+
+    <div id="contents" class="mp-list">
+
+        <div id="contents-in" class="contents-in">
+            <!-- dynamic content would be here -->
+
+        </div>
+
+    </div>
+</div>
+
+<script src="js/myproject.js"></script>
+</body>
+
+</html>
