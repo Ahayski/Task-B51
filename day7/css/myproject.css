@@ -338,6 +338,7 @@ body {
 .img-detail img {
     width: 100%;
     height: auto;
+    object-fit: cover;
 }
 
 .icons {

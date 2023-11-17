@@ -74,6 +74,7 @@ body {
 }
 
 .contain-based {
+    background-color: white;
     margin: 150px auto;
     display: flex;
     width: 1000px;

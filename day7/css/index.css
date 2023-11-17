@@ -1,11 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 * {
     margin: 0;
     text-decoration: none;
+    font-family: 'Poppins', sans-serif;
 
-}
-
-html {
-    font-family: poppin, sans-serif;
 }
 
 body {
@@ -51,7 +50,7 @@ body {
     border-radius: 10px;
     text-decoration: none;
     text-align: center;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .nav-link {
