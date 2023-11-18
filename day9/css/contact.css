@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    text-decoration: none;
+}
+
+html {
+    font-family: poppin, sans-serif;
+}
+
+body {
+    background-color: #dce0e4;
+}
+
+.navbar {
+    background-color: #f4f3f3;
+    box-shadow: 0px 0px 1px black;
+    height: 75px;
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.nav-cd1 {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 30px;
+}
+
+.nav-cd1 ul {
+    display: flex;
+    gap: 50px;
+    list-style-type: none;
+    align-items: center;
+}
+
+.nav-cd2 {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 70px;
+}
+
+.btn-contact {
+    background-color: #111727;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 18px;
+}
+
+.nav-link {
+    font-size: 20px;
+    width: max-content;
+}
+
+.nav-link a {
+    color: black;
+    text-decoration: none;
+}
+
+.nav-link a:hover {
+    font-weight: bolder;
+}
+
+.container-parent {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    margin-top: 130px;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container-form {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.label-contact {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.input-contact {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    border-color: #d9d9d9;
+    margin-bottom: 30px;
+}
+
+.btn-sbct {
+    display: flex;
+    justify-content: end;
+}
+
+.submit-contact {
+    justify-content: center;
+    background-color: #111727;
+    color: white;
+    padding: 10px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+#hamburger-button {
+    display: none;
+}
+
+.hamburger-nav-container {
+    display: none;
+    margin-top: 78px;
+    top: 0;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+}
+
+.hamburger-nav-container a {
+    color: white;
+    border: 2px solid white;
+    background-color: #9a9a9a;
+    text-align: center;
+    padding: 10px;
+}
+
+.hamburger-nav-container .active {
+    background-color: #ff4500;
+}
+
+@media only screen and (max-width: 575px) {
+    .nav-collapse {
+        display: none;
+    }
+
+    #hamburger-button {
+        display: block;
+    }
+
+    .hamburger-nav-container {
+        font-size: 23px;
+        display: none;
+        flex-direction: column;
+    }
+}

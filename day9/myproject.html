@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <title>Contact Me</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="css/myproject.css">
+</head>
+
+<nav class="navbar">
+    <div class="nav-cd1">
+        <ul>
+            <li><img src="assets/image/dw.png" style="height: 40px;"></li>
+            <li class="nav-link nav-collapse">
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+            <li class="nav-link nav-collapse">
+                <a href="myproject.html">
+                    My Project
+                </a>
+            </li>
+        </ul>
+        <div class="nav-cd2">
+            <a href="contact.html" class="btn-contact nav-collapse">Contact me</a>
+            <i class="fa-solid fa-bars fa-2x" style="cursor: pointer;" id="hamburger-button"
+                onclick="openHamburger()"></i>
+        </div>
+    </div>
+</nav>
+
+<div class="hamburger-nav-container" id="hamburger-nav-container">
+    <a href="index.html">Home</a>
+    <a href="myproject.html" class="active">My Project</a>
+    <a href="contact.html">Contact Me</a>
+</div>
+
+<!-- form untuk add my project -->
+<!-- <div class="container-parent"> -->
+<div class="container">
+    <form class="form-MP" onsubmit="submitMP(event)">
+        <h2>ADD MY PROJECT</h2>
+        <label class="label-MP">Project Name</label>
+        <input type="text" class="input-MP" id="inputProject" />
+        <!-- untuk star & end date -->
+        <div class="ct-form">
+            <div class="ct-form1">
+                <label class="label-MP">Start Date</label>
+                <input type="text" name="date" class="input-MP" id="inputStart" onfocus="(this.type='date')"
+                    onblur="if(!this.value)this.type='text'" />
+            </div>
+            <div class="ct-form2">
+                <label class="label-MP">End Date</label>
+                <input type="text" name="date" class="input-MP" id="inputEnd" onfocus="(this.type='date')"
+                    onblur="if(!this.value)this.type='text'" />
+            </div>
+        </div>
+        <label class="label-MP">Description</label>
+        <textarea class="input-desc" id="inputDesc"></textarea>
+
+        <!-- untuk check box -->
+        <div class="cekbox">
+            <label class="label-MP">Technologies</label>
+            <div class="cekbox-ct">
+                <div class="cekbox1">
+                    <div><input type="checkbox" id="inputNode"> Node Js </div>
+                    <div><input type="checkbox" id="inputNext"> Next Js </div>
+                </div>
+                <div class="cekbox2">
+                    <div> <input type="checkbox" id="inputReact"> React Js </div>
+                    <div> <input type="checkbox" id="inputTypeS"> Typescript </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <label class="label-MP">Upload Image</label>
+            <div class="input-blog-image-group">
+                <label for="inputImage">
+                    <div class="bt-choose">
+                        <p>choose</p>
+                    </div>
+                    <img src="assets/icon/file.png" alt="file" />
+                </label>
+                <input type="file" id="inputImage" hidden />
+            </div>
+        </div>
+        <div class="btn-sbct">
+            <button>Submit</button>
+        </div>
+    </form>
+
+</div>
+<!-- </div> -->
+
+<hr class="line" />
+<div class="mp-bg">
+    <div class="mp-title">
+        <h1>MY PROJECT</h1>
+    </div>
+
+    <div id="contents" class="mp-list">
+
+        <div id="contents-in" class="contents-in">
+            <!-- dynamic content would be here -->
+
+        </div>
+
+    </div>
+</div>
+
+<script src="js/myproject.js"></script>
+<script src="js/nav.js"></script>
+</body>
+
+</html>
