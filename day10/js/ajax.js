@@ -55,7 +55,7 @@ async function filterTestimonials(Rating) {
     })
 
     if (testimonialFiltered.length === 0) {
-        testimonialHTML = `<h3>Data Not Found</h3>`
+        testimonialHTML = `<h3 class="text-center">Data Not Found</h3>`
     } else {
         testimonialFiltered.forEach((item) => {
             testimonialHTML += html(item)
