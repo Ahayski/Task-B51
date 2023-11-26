@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <title>Add My Project</title>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="stylesheet" href="./css/myproject.css">
+    <link rel="stylesheet" href="/assets/css/myproject.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid gap-3">
             <a class="navbar-brand ms-4" href="#">
-                <img src="assets/image/dw.png" style="height: 40px;">
+                <img src="/assets/image/dw.png" style="height: 40px;">
             </a>
             <!-- toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -29,16 +29,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
                     <li class="nav-item">
-                        <a class="nav-link " href="index.html">Home</a>
+                        <a class="nav-link " href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="myproject.html">Add Project</a>
+                        <a class="nav-link active" href="/addmyproject">Add Project</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="testimonial.html">Testimonial</a>
+                        <a class="nav-link" href="/testimonial">Testimonial</a>
                     </li>
                 </ul>
-                <a href="contact.html">
+                <a href="/contact">
                     <button class="btn btn-primary me-4" id="btn-nav" type="submit">Contact Me</button>
                 </a>
             </div>
@@ -47,29 +47,29 @@
 
     <!-- Form Content -->
     <div class="d-flex justify-content-center">
-        <form class="form-ct mt-5 mb-5" onsubmit="submitMP(event)">
+        <form method="post" action="/addmyproject" class="form-ct mt-5 mb-5">
             <h2 class="mb-3"> ADD MY PROJECT</h2>
             <div class="mb-3">
                 <label class="form-label">Project Name</label>
-                <input type="text" id="inputProject" class="form-control">
+                <input type="text" id="inputProject" name="project" class="form-control">
             </div>
             <!-- date -->
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Start Date</label>
-                    <input type="text" name="date" class="form-control" id="inputStart" onfocus="(this.type='date')"
-                        onblur="if(!this.value)this.type='text'" />
+                    <input type="text" name="startDate" class="form-control" id="inputStart"
+                        onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" />
                 </div>
                 <div class="col-md-6 mb-3">
                     <label class="form-label">End Date</label>
-                    <input type="text" name="date" class="form-control" id="inputEnd" onfocus="(this.type='date')"
+                    <input type="text" name="endDate" class="form-control" id="inputEnd" onfocus="(this.type='date')"
                         onblur="if(!this.value)this.type='text'" />
                 </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Decription</label>
-                <textarea class="form-control" id="inputDesc" aria-label="With textarea"></textarea>
+                <textarea class="form-control" id="inputDesc" name="desc" aria-label="With textarea"></textarea>
             </div>
 
             <div class="row mb-3">
@@ -77,15 +77,15 @@
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <div class="d-flex align-items-center gap-2 "> <input class="form-check-input mt-0"
-                                id="inputNode" type="checkbox"> Node Js</div>
+                                id="inputNode" name="node" type="checkbox"> Node Js</div>
                         <div class="d-flex align-items-center gap-2"> <input class="form-check-input mt-0"
-                                id="inputNext" type="checkbox"> Next Js </div>
+                                id="inputNext" name="next" type="checkbox"> Next Js </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="d-flex align-items-center gap-2"> <input class="form-check-input mt-0"
-                                id="inputReact" type="checkbox"> React Js</div>
+                                id="inputReact" name="react" type="checkbox"> React Js</div>
                         <div class="d-flex align-items-center gap-2"> <input class="form-check-input mt-0"
-                                id="inputTypeS" type="checkbox"> Typescript </div>
+                                id="inputTypeS" name="typeS" type="checkbox"> Typescript </div>
                     </div>
                 </div>
             </div>
@@ -100,9 +100,9 @@
                 </div> -->
                 <div class="input-group custom-file-button mb-5">
                     <label class="input-group-text" id="lbl-choose" for="inputImage">Choose</label>
-                    <input type="file" class="form-control" id="inputImage">
+                    <input type="file" class="form-control" id="inputImage" name="Image">
                     <label class="input-group-text">
-                        <img src="assets/icon/file.png" alt="file" />
+                        <img src="/assets/icon/file.png" alt="file" />
                     </label>
                 </div>
 
@@ -115,15 +115,15 @@
     </div>
 
     <!-- Hasil Content-->
-    <div class="text-center pt-4" id="judul">
+    <!-- <div class="text-center pt-4" id="judul">
         <h1>MY PROJECT</h1>
     </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4 p-5" id="contents-in">
+    <div class="row row-cols-1 row-cols-md-3 g-4 p-5" id="contents-in"> -->
 
-        <!-- disini akan diisi konten -->
-        <!-- <div class="col">
+    <!-- disini akan diisi konten -->
+    <!-- <div class="col">
             <div class="card h-100 p-4">
-                <img src="./assets/image/foto.jpg" class="card-img-top" alt="...">
+                <img src="./assets/image/foto.jpg" class="card-img-top" alt=".">
                 <div class="card-body">
                     <a class="ttl-link" href="">
                         <h4 class="card-title" id="card-ttl">Card title</h4>
@@ -151,10 +151,10 @@
         </div> -->
 
 
-    </div>
+    <!-- </div> -->
 
-    <script src="./js/myproject.js"></script>
-    <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/assets/js/myproject.js"></script> -->
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
