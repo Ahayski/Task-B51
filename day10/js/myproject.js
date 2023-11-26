@@ -55,9 +55,13 @@ function renderMP() {
                         ${renderTechImages(dataMP[index])}
                     </div>
 
-                    <div class="d-grid gap-2 d-md-block" id="btn-aksi">
-                        <button class="btn btn-primary" type="button">Edit</button>
-                        <button class="btn btn-primary" type="button">Delete</button>
+                    <div class="row" id="btn-aksi">
+                        <div class="col-md-6 mb-3">
+                            <button class="btn btn-primary" id="btn-edit">Edit</button>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <button class="btn btn-primary" id="btn-dlt">Delete</button>
+                        </div>
                     </div>
                 </div>
             </div>
