@@ -218,25 +218,6 @@ function Icon(icon) {
     return codeIcon
 }
 
-function viewIconHbs(icon) {
-
-    let codeIcon = ""
-
-    if (icon.node) {
-        codeIcon += `<i class="fa-brands fa-node-js mb-3">&nbsp Node js</i>`
-    }
-    if (icon.react) {
-        codeIcon += `<i class="fa-brands fa-react mb-3">&nbsp React js</i>`
-    }
-    if (icon.next) {
-        codeIcon += `<i class="fa-brands fa-vuejs mb-3">&nbsp Next js</i>`
-    }
-    if (icon.script) {
-        codeIcon += `<i class="fa-brands fa-js mb-3">&nbsp Type Script</i>`
-    }
-
-    return codeIcon
-}
 
 function newDate(date) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Augu", "Sept", "Oct", "Nov", "Dec"];

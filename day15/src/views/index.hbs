@@ -27,27 +27,65 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {{#if isLogin}}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/addmyproject">Add Project</a>
+                        <a class="nav-link " href="/addmyproject">Add Project</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/testimonial">Testimonial</a>
                     </li>
                 </ul>
+                {{else}}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="/addmyproject">Add Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/testimonial">Testimonial</a>
+                    </li>
+                </ul>
+                {{/if}}
+                {{#if isLogin}}
+                <ul class="navbar-nav me-2 mb-2 mb-lg-0 gap-3">
+                    <li class="nav-item">
+                        <span class="nav-link ">Welcome, {{user.name}}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/logout">Logout</a>
+                    </li>
+                </ul>
+                {{else}}
+                <ul class="navbar-nav me-2 mb-2 mb-lg-0 gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                </ul>
+                {{/if}}
                 <a href="/contact">
                     <button class="btn btn-primary me-4" id="btn-nav" type="submit">Contact Me</button>
                 </a>
             </div>
         </div>
     </nav>
-
+    {{#if messages.success}}
+    <div class="alert alert-success" role="alert">
+        <div class="container">
+            {{messages.success}}
+        </div>
+    </div>
+    {{/if}}
     <!-- Isi Content -->
     <div class="d-flex  justify-content-center p-4 " id="bg-based">
-
         <div class="card mb-3" id="card-lg">
             <div class="row g-0 p-5 gap-4">
                 <!-- artikel -->
@@ -90,8 +128,27 @@
                 <div class="card" id="card-fp" style="width: 18rem;">
                     <img src="/assets/image/foto.jpg" class="card-img-top" alt=".">
                     <div class="card-body" id="card-id">
-                        <h4 class="card-title">Febryan De Gheans</h4>
+                        <h4 class="card-title">{{dataCard.name}}</h4>
                         <p class="card-text">Fullstack Developer</p>
+
+                    </div>
+                    <div class="p-2">
+                        <table class="table table-primary table-striped ">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Project Name</th>
+                                    <th scope="col">Year</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table table-light table-striped ">
+                                {{#each dataCard.projectName}}
+                                <tr>
+                                    <td>{{this}}</td>
+                                    <td>{{lookup../dataCard.year @index}}</td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -118,33 +175,73 @@
         {{#each data}}
         <div class="col">
             <div class="card h-100 p-4" id="fullCard">
-                <img src="/assets/image/logo2.jpg" class="card-img-top" alt=".">
+                <img src="/assets/image/{{this.image}}" class="card-img-top" alt=".">
                 <div class="card-body">
-                    <a class="ttl-link" href="/myproject-detail/{{@index}}">
-                        <h4 class="card-title" id="card-ttl">{{this.project}}</h4>
+                    <a class="ttl-link" href="/myproject-detail/{{this.id}}">
+                        <h4 class="card-title" id="card-ttl">{{this.name}}</h4>
                     </a>
-                    <p class="card-text" id="duration"> Durasi : {{this.duration}}</p>
-                    <p class="card-text">{{this.desc}}</p>
+                    {{!-- duration --}}
+                    <p class="card-text" id="duration"> Durasi : <span id="duration-{{@index}}">{{waktu this.start_date
+                            this.end_date}}</span></p>
+
+
+                    <p class="card-text">{{this.description}}</p>
 
 
                     <div class="row mb-4 gap-3" id="icon">
-                        {{{this.techs}}}
+
+                        {{#if this.technologies}}
+                        {{#each this.technologies}}
+                        <div class="col-md-auto"><img src="/assets/icon/{{this}}.png"></div>
+                        {{/each}}
+                        {{/if}}
+
+
                     </div>
 
+
+                    {{#if isLogin}}
                     <div class="row" id="btn-aksi">
                         <div class="col-md-6 mb-3">
-                            <a href="/update-myproject/{{@index}}" class="btn btn-primary" id="btn-edit">Edit</a>
+                            <a href="/update-myproject/{{this.id}}" class="btn btn-primary" id="btn-edit">Edit</a>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <form method="post" action="/delete-MP/{{@index}}">
+                            <form method="post" action="/delete-MP/{{this.id}}">
                                 <button class="btn btn-primary" id="btn-dlt">Delete</button>
                             </form>
                         </div>
                     </div>
+                    {{else}}
+                    <div class="row" id="btn-aksi">
+                        <div class="col-md-6 mb-3">
+                            <a href="/update-myproject/{{this.id}}" class="btn btn-primary disabled"
+                                id="btn-edit">Edit</a>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <form method="post" action="/delete-MP/{{this.id}}">
+                                <button class="btn btn-primary disabled" id="btn-dlt">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    {{/if}}
+
+
 
                 </div>
             </div>
         </div>
+        <script>
+            // Ambil tanggal start_date dan end_date dari data
+            var startDate = "{{this.start_date}}";
+            var endDate = "{{this.end_date}}";
+
+            // Hitung durasi antara start_date dan end_date
+            var calculatedDuration = waktu(startDate, endDate);
+
+            // Tampilkan durasi pada elemen span
+            document.getElementById('duration-{{@index}}').innerText = calculatedDuration;
+            console.log("duration-{{@index}}", calculatedDuration) 
+        </script>
         {{/each}}
     </div>
 
