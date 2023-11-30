@@ -9,6 +9,7 @@ const hbs = require('hbs');//import package hbs 1
 const bcrypt = require('bcrypt')
 const session = require('express-session')
 const flash = require('express-flash')
+const upload = require('./src/middlewares/uploadFile')
 
 //untuk membuat/ meregister helperr
 hbs.registerHelper('includes', function (arr, val, options) {
@@ -24,6 +25,7 @@ hbs.registerHelper('waktu', waktu)// register helper 2
 // setting (hbs) variabel global, configuration  dll
 app.set("view engine", "hbs")
 app.set("views", path.join(__dirname, 'src/views'))
+app.use(express.static(path.join(__dirname, 'src/uploads')))
 // Menggunakan Handlebars sebagai engine view
 app.engine('hbs', hbs.__express); 3
 
@@ -49,10 +51,10 @@ app.use(session({
 app.get('/', home, card)
 app.post('/delete-MP/:id', deleteMP)
 
-app.post('/addmyproject', addMp)
+app.post('/addmyproject', upload.single('Image'), addMp)
 app.get('/addmyproject', addMpViews)
 
-app.post('/update-myproject', updateMP)
+app.post('/update-myproject', upload.single('Image'), updateMP)
 app.get('/update-myproject/:id', updateMPViews)
 
 
@@ -83,33 +85,36 @@ const data = []
 // Fungsi home
 
 function logout(req, res) {
-    req.session.destroy(err => {
-        if (err) {
-            console.error('Error destroying session:', err);
-        } else {
-            // Redirect ke halaman login atau halaman lain setelah logout
-            res.redirect('/login');
-        }
-    });
+    req.session.isLogin = false
+    req.session.name = ""
+    req.flash('success', 'Anda berhasil logout')
+    res.redirect('/')
 }
 
 async function home(req, res, next) {
 
-    const query = `SELECT * FROM tb_projects `
+    // Check if the user is logged in
+    if (req.session.isLogin) {
+        const userId = req.session.idUser;
 
-    const obj = await sequelize.query(query, { type: QueryTypes.SELECT })
-    console.log('Data:', obj)
-    const isLogin = req.session.isLogin
-    //menyimpan data hasil query ke dalam res.locals atau req.locals
-    obj.forEach(item => { item.isLogin = isLogin })
-    res.locals.homeData = obj
-    // Lanjutkan ke fungsi atau middleware berikutnya
+        const query = `
+            SELECT tb_projects.id, tb_projects.name, tb_projects.start_date, tb_projects.end_date, "authorId", description, technologies, image, users.name AS author
+            FROM tb_projects
+            LEFT JOIN users ON tb_projects."authorId" = users.id
+            WHERE tb_projects."authorId" = ${userId}
+            ORDER BY tb_projects.id DESC
+        `;
+
+        const projects = await sequelize.query(query, { type: QueryTypes.SELECT });
+
+        // Save the user's projects to res.locals
+        res.locals.userProjects = projects;
+    }
     next()
-
 }
 // Fungsi card
 async function card(req, res) {
-    const id = 3
+    const id = 1
     const query = `SELECT * FROM profiles WHERE id='${id}'`
 
     const obj = await sequelize.query(query, { type: QueryTypes.SELECT })
@@ -118,7 +123,7 @@ async function card(req, res) {
 
 
     // Render halaman dengan menggunakan data dari home dan card
-    res.render('index', { data: res.locals.homeData, dataCard: obj[0], user: req.session.user, isLogin })
+    res.render('index', { data: res.locals.userProjects, dataCard: obj[0], user: req.session.user, isLogin })
 
 }
 
@@ -135,7 +140,8 @@ async function deleteMP(req, res) {
 async function addMp(req, res) {
 
     const { project, startDate, endDate, desc, nodejs, nextjs, reactjs, typescript } = req.body // Destructuring
-
+    const idUser = req.session.idUser
+    const Image = req.file.filename
     // Filter nilai yang dicentang saja
     const technologies = [
         { name: 'nodejs', value: nodejs },
@@ -146,8 +152,8 @@ async function addMp(req, res) {
 
     const image = "logo1.jpg"
     const query = `
-            INSERT INTO public.tb_projects(name, start_date, end_date, description, technologies, image) 
-            VALUES ('${project}', '${startDate}', '${endDate}', '${desc}', '{${technologies}}', '${image}')
+            INSERT INTO public.tb_projects(name, start_date, end_date, "authorId", description, technologies, image) 
+            VALUES ('${project}', '${startDate}', '${endDate}',${idUser} ,'${desc}', '{${technologies}}', '${Image}')
         `
 
     const obj = await sequelize.query(query, { type: QueryTypes.INSERT })
@@ -170,6 +176,17 @@ async function updateMPViews(req, res) {
 async function updateMP(req, res) {
     const { id, project, startDate, endDate, desc, nodejs, nextjs, reactjs, typescript } = req.body // Destructuring
 
+    let Image = ""
+
+    if (req.file) {
+        Image = req.file.filename
+    } else if (!Image) {
+        const query = `SELECT tb_projects.id, tb_projects.name, tb_projects.start_date, tb_projects.end_date,"authorId", description,technologies, image, users.name AS author FROM 
+        tb_projects LEFT JOIN users ON tb_projects."authorId" = users.id  WHERE tb_projects.id =${id}`
+        let obj = await sequelize.query(query, { type: QueryTypes.SELECT })
+        Image = obj[0].image
+    }
+
     // Filter nilai yang dicentang saja
     const technologies = [
         { name: 'nodejs', value: nodejs },
@@ -180,7 +197,7 @@ async function updateMP(req, res) {
     const image = "logo1.jpg"
 
     const query = `UPDATE tb_projects SET id='${id}',name='${project}', start_date='${startDate}', 
-    end_date='${endDate}', description='${desc}', technologies='{${technologies}}', image='${image}' WHERE id=${id}`
+    end_date='${endDate}', description='${desc}', technologies='{${technologies}}', image='${Image}' WHERE id=${id}`
     const obj = await sequelize.query(query, { type: QueryTypes.UPDATE })
     // const dataMP = { project, startDate, endDate, desc, node, next, react, typeS }
     // data.unshift(dataMP)
@@ -190,6 +207,11 @@ async function updateMP(req, res) {
 
 function addMpViews(req, res) {
     const isLogin = req.session.isLogin
+
+    if (!isLogin) {
+        req.flash('danger', "Anda belum memiliki hak akses!")
+        return res.redirect('/')
+    }
     res.render('addmyproject', { user: req.session.user, isLogin })
 }
 
@@ -202,7 +224,8 @@ function myproject(req, res) {
 async function myprojectDetail(req, res) {
     const { id } = req.params //destructuring
 
-    const query = `SELECT * FROM tb_projects WHERE id=${id} `
+    const query = `SELECT tb_projects.id, tb_projects.name, tb_projects.start_date, tb_projects.end_date,"authorId", description,technologies, image, users.name AS author FROM 
+    tb_projects LEFT JOIN users ON tb_projects."authorId" = users.id WHERE tb_projects.id=${id} `
     const obj = await sequelize.query(query, { type: QueryTypes.SELECT })
     console.log("ini adlaha id ke", obj)
     const isLogin = req.session.isLogin
@@ -250,10 +273,10 @@ async function login(req, res) {
         console.log("LOGIN SUKSES")
         req.flash('success', 'Login success!')
         req.session.isLogin = true
-        req.session.user = {
-            name: obj[0].name,
-            email: obj[0].email
-        }
+        req.session.user = obj[0].name
+        req.session.email = obj[0].email
+        req.session.idUser = obj[0].id
+
 
         res.redirect('/')
     })
@@ -261,6 +284,10 @@ async function login(req, res) {
 
 function registerView(req, res) {
     const isLogin = req.session.isLogin
+    if (isLogin) {
+        req.flash('danger', "Anda sudah masuk ke akun anda!")
+        return res.redirect('/')
+    }
     res.render('register', isLogin)
 }
 
@@ -284,7 +311,7 @@ async function register(req, res) {
 
         // const queryLog = `SELECT * FROM users WHERE email='${email}'`
         // let obj = await sequelize.query(queryLog, { type: QueryTypes.SELECT })
-        // req.session.isLoginReg = true
+        // req.session.isLogin = true
         // req.session.user = obj[0].name
         // req.session.idLogin = obj[0].id
 

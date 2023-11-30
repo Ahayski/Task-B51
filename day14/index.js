@@ -131,9 +131,7 @@ async function updateMPViews(req, res) {
 
     const query = `SELECT * FROM tb_projects WHERE id=${id} `
     const obj = await sequelize.query(query, { type: QueryTypes.SELECT })
-    res.locals.projectData = obj[0];
-    console.log('Technologies:', res.locals.projectData.technologies)
-    res.render('update-myproject', { data: res.locals.projectData })
+    res.render('update-myproject', { data: obj[0] })
 }
 async function updateMP(req, res) {
     const { id, project, startDate, endDate, desc, nodejs, nextjs, reactjs, typescript } = req.body // Destructuring
@@ -150,8 +148,7 @@ async function updateMP(req, res) {
     const query = `UPDATE tb_projects SET id='${id}',name='${project}', start_date='${startDate}', 
     end_date='${endDate}', description='${desc}', technologies='{${technologies}}', image='${image}' WHERE id=${id}`
     const obj = await sequelize.query(query, { type: QueryTypes.UPDATE })
-    // const dataMP = { project, startDate, endDate, desc, node, next, react, typeS }
-    // data.unshift(dataMP)
+
     res.redirect('/')
 }
 
